@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Be_Vietnam_Pro, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, Be_Vietnam_Pro, Playfair_Display, Orbitron } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -25,6 +25,13 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "SimDepGiaRe - Kho Sim Số Đẹp Giá Rẻ",
   description: "Mua bán sim số đẹp giá rẻ, sim tứ quý, ngũ quý, lộc phát, phong thủy. Sim Viettel, VinaPhone, MobiFone chính chủ.",
@@ -39,9 +46,10 @@ export default function RootLayout({
   return (
     <html lang="vi" className="dark">
       <body
-        className={`${cormorant.variable} ${beVietnam.variable} ${playfair.variable} font-be-vietnam min-h-screen flex flex-col antialiased`}
+        className={`${cormorant.variable} ${beVietnam.variable} ${playfair.variable} ${orbitron.variable} font-be-vietnam min-h-screen flex flex-col antialiased`}
       >
         <div className="noise-overlay" />
+        <div className="scan-line" />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

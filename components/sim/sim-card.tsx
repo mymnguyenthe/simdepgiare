@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { GoldBadge } from "@/components/ui/gold-badge";
-import { GoldButton } from "@/components/ui/gold-button";
 import { formatPrice, formatPhoneNumber } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
@@ -18,15 +16,20 @@ interface SimCardProps {
 }
 
 export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
-  const carrierVariant = sim.carrier as "viettel" | "vinaphone" | "mobifone";
+  const carrierColors = {
+    viettel: "neon-text-cyan",
+    vinaphone: "neon-text-magenta",
+    mobifone: "neon-text-purple",
+  };
+
+  const carrierVariant = sim.carrier as keyof typeof carrierColors;
+  const colorClass = carrierColors[carrierVariant] || "neon-text-cyan";
 
   return (
     <Link href={`/sims/${sim.id}`}>
       <div
         className={cn(
-          "group relative rounded-sm border border-gold-border bg-surface p-6",
-          "transition-all duration-300",
-          "hover:-translate-y-0.5 hover:gold-glow-hover",
+          "neon-card relative rounded-lg p-6 cursor-pointer",
           "opacity-0 animate-fade-up",
           className
         )}
@@ -34,36 +37,36 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
       >
         {/* Carrier badge */}
         <div className="mb-4">
-          <GoldBadge variant={carrierVariant}>
+          <span className={cn("text-sm font-bold uppercase tracking-wider", colorClass)}>
             {sim.carrier}
-          </GoldBadge>
+          </span>
         </div>
 
-        {/* Sim number — Playfair Display */}
-        <h3 className="font-playfair text-2xl font-semibold text-text-primary mb-2 group-hover:text-gold-primary transition-colors">
+        {/* Sim number — Orbitron font */}
+        <h3 className="font-orbitron text-2xl font-bold text-text-primary mb-3 tracking-wider">
           {formatPhoneNumber(sim.phone_number)}
         </h3>
 
-        {/* Price — gold shimmer */}
-        <p className="text-xl font-bold text-shimmer-gold mb-3">
+        {/* Price — cyber gradient */}
+        <p className="text-2xl font-bold cyber-gradient-text mb-4">
           {formatPrice(sim.price)}
         </p>
 
         {/* Category tag */}
         {sim.category_name && (
-          <span className="block text-xs text-text-secondary mb-4">
+          <span className="block text-xs text-text-secondary mb-4 uppercase tracking-wide">
             {sim.category_name}
           </span>
         )}
 
         {/* CTA */}
-        <GoldButton variant="secondary" size="sm" className="w-full">
+        <button className="neon-button w-full py-3 rounded-md text-sm">
           Mua ngay
-        </GoldButton>
+        </button>
 
-        {/* Featured shimmer border */}
+        {/* Featured glow effect */}
         {sim.is_featured && (
-          <div className="absolute inset-0 rounded-sm border border-gold-primary/30 animate-glow-pulse pointer-events-none" />
+          <div className="absolute inset-0 rounded-lg neon-border-cyan pointer-events-none opacity-50" />
         )}
       </div>
     </Link>

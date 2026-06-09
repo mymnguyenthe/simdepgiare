@@ -14,11 +14,11 @@ interface SimGridProps {
 export function SimGrid({ sims }: SimGridProps) {
   if (sims.length === 0) {
     return (
-      <div className="text-center py-16">
-        <p className="text-text-secondary text-lg">
+      <div className="text-center py-24 neon-card rounded-lg">
+        <p className="text-text-secondary text-lg mb-2">
           Không tìm thấy sim nào phù hợp
         </p>
-        <p className="text-text-muted text-sm mt-2">
+        <p className="text-text-muted text-sm">
           Vui lòng thử lại với bộ lọc khác
         </p>
       </div>

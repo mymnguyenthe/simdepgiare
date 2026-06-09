@@ -1,7 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Gold Palette — Royal Gold Vault */
+  /* Neon Cyberpunk Palette */
+  --color-neon-cyan: #00F5FF;
+  --color-neon-magenta: #FF00FF;
+  --color-neon-purple: #A855F7;
+  --color-neon-blue: #3B82F6;
+  --color-neon-green: #00FF88;
+  --color-neon-yellow: #FFE500;
+  --color-neon-pink: #FF1493;
+
+  /* Gold (kept for compatibility) */
   --color-gold-primary: #D4AF37;
   --color-gold-deep: #B8860B;
   --color-gold-champagne: #F7E7CE;
@@ -10,30 +19,34 @@
   --color-gold-border-strong: rgba(212, 175, 55, 0.4);
 
   /* Backgrounds */
-  --color-background: #0A0A0A;
-  --color-surface: #141414;
-  --color-surface-elevated: #1C1C1C;
-  --color-surface-overlay: #242424;
+  --color-background: #0A0A0F;
+  --color-surface: #12121A;
+  --color-surface-elevated: #1A1A25;
+  --color-surface-overlay: #222233;
 
   /* Text */
-  --color-text-primary: #F5F0E8;
-  --color-text-secondary: #A89F91;
-  --color-text-muted: #6B6358;
+  --color-text-primary: #F0F0FF;
+  --color-text-secondary: #A0A0C0;
+  --color-text-muted: #606080;
 
   /* Status */
-  --color-success: #4ADE80;
-  --color-error: #EF4444;
+  --color-success: #00FF88;
+  --color-error: #FF3366;
 
   /* Fonts */
   --font-cormorant: var(--font-cormorant), "Cormorant Garamond", serif;
   --font-be-vietnam: var(--font-be-vietnam), "Be Vietnam Pro", sans-serif;
   --font-playfair: var(--font-playfair), "Playfair Display", serif;
+  --font-orbitron: "Orbitron", sans-serif;
 
   /* Animations */
   --animate-shimmer: shimmer 3s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 2.5s ease-in-out infinite;
   --animate-fade-up: fade-up 0.6s ease-out forwards;
   --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-neon-pulse: neon-pulse 2s ease-in-out infinite;
+  --animate-neon-flicker: neon-flicker 0.1s ease-in-out infinite;
+  --animate-scan-line: scan-line 8s linear infinite;
 
   @keyframes shimmer {
     0% { background-position: 200% 0; }
@@ -57,6 +70,25 @@
   @keyframes fade-in {
     0% { opacity: 0; }
     100% { opacity: 1; }
+  }
+
+  @keyframes neon-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+    }
+    50% {
+      box-shadow: 0 0 10px currentColor, 0 0 40px currentColor, 0 0 80px currentColor;
+    }
+  }
+
+  @keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
   }
 }
 
@@ -163,6 +195,101 @@ body {
 
 /* Selection color */
 ::selection {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(0, 245, 255, 0.3);
   color: var(--color-text-primary);
+}
+
+/* Neon Effects */
+.neon-text-cyan {
+  color: var(--color-neon-cyan);
+  text-shadow: 0 0 10px var(--color-neon-cyan), 0 0 20px var(--color-neon-cyan), 0 0 40px var(--color-neon-cyan);
+}
+
+.neon-text-magenta {
+  color: var(--color-neon-magenta);
+  text-shadow: 0 0 10px var(--color-neon-magenta), 0 0 20px var(--color-neon-magenta), 0 0 40px var(--color-neon-magenta);
+}
+
+.neon-text-purple {
+  color: var(--color-neon-purple);
+  text-shadow: 0 0 10px var(--color-neon-purple), 0 0 20px var(--color-neon-purple), 0 0 40px var(--color-neon-purple);
+}
+
+.neon-border-cyan {
+  border-color: var(--color-neon-cyan);
+  box-shadow: 0 0 10px var(--color-neon-cyan), inset 0 0 10px rgba(0, 245, 255, 0.1);
+}
+
+.neon-border-magenta {
+  border-color: var(--color-neon-magenta);
+  box-shadow: 0 0 10px var(--color-neon-magenta), inset 0 0 10px rgba(255, 0, 255, 0.1);
+}
+
+.neon-border-purple {
+  border-color: var(--color-neon-purple);
+  box-shadow: 0 0 10px var(--color-neon-purple), inset 0 0 10px rgba(168, 85, 247, 0.1);
+}
+
+.neon-card {
+  background: linear-gradient(135deg, rgba(18, 18, 26, 0.9) 0%, rgba(26, 26, 37, 0.9) 100%);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.1), inset 0 0 20px rgba(0, 245, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.neon-card:hover {
+  border-color: var(--color-neon-cyan);
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.3), inset 0 0 30px rgba(0, 245, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+.neon-button {
+  background: linear-gradient(135deg, var(--color-neon-cyan) 0%, var(--color-neon-magenta) 100%);
+  color: var(--color-background);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.neon-grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-neon-cyan), transparent);
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  animation: scan-line 8s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.glitch-text {
+  position: relative;
+  animation: neon-flicker 0.1s ease-in-out infinite;
+}
+
+.cyber-gradient {
+  background: linear-gradient(135deg, var(--color-neon-cyan) 0%, var(--color-neon-purple) 50%, var(--color-neon-magenta) 100%);
+}
+
+.cyber-gradient-text {
+  background: linear-gradient(135deg, var(--color-neon-cyan) 0%, var(--color-neon-purple) 50%, var(--color-neon-magenta) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

@@ -1,5 +1,3 @@
-import { MOCK_SIMS, MOCK_CATEGORIES } from "@/lib/mock-data";
-
 // Types
 export interface Sim {
   id: string;
@@ -44,11 +42,6 @@ export interface SimsResult {
   totalPages: number;
 }
 
-// Check if Supabase is configured
-function isSupabaseConfigured(): boolean {
-  return !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-}
-
 // Get sims with filters
 export async function getSims(filters: SimsFilter = {}): Promise<SimsResult> {
   const {
@@ -63,62 +56,6 @@ export async function getSims(filters: SimsFilter = {}): Promise<SimsResult> {
     sortBy = "newest",
   } = filters;
 
-  // Use mock data if Supabase is not configured
-  if (!isSupabaseConfigured()) {
-    let filtered = [...MOCK_SIMS].filter((s) => !s.is_sold);
-
-    if (carrier && carrier.length > 0) {
-      filtered = filtered.filter((s) => carrier.includes(s.carrier));
-    }
-
-    if (categoryId && categoryId.length > 0) {
-      filtered = filtered.filter((s) => s.category_id && categoryId.includes(s.category_id));
-    }
-
-    if (minPrice !== undefined) {
-      filtered = filtered.filter((s) => s.price >= minPrice);
-    }
-
-    if (maxPrice !== undefined) {
-      filtered = filtered.filter((s) => s.price <= maxPrice);
-    }
-
-    if (search && search.trim()) {
-      filtered = filtered.filter((s) => s.phone_number.includes(search.trim()));
-    }
-
-    if (isFeatured !== undefined) {
-      filtered = filtered.filter((s) => s.is_featured === isFeatured);
-    }
-
-    // Sort
-    switch (sortBy) {
-      case "price_asc":
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case "price_desc":
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        // newest — keep original order
-        break;
-    }
-
-    const count = filtered.length;
-    const from = (page - 1) * pageSize;
-    const to = from + pageSize;
-    const data = filtered.slice(from, to);
-
-    return {
-      data,
-      count,
-      page,
-      pageSize,
-      totalPages: Math.ceil(count / pageSize),
-    };
-  }
-
-  // Supabase implementation
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 
@@ -190,11 +127,6 @@ export async function getSims(filters: SimsFilter = {}): Promise<SimsResult> {
 }
 
 export async function getSimById(id: string): Promise<Sim | null> {
-  if (!isSupabaseConfigured()) {
-    const sim = MOCK_SIMS.find((s) => s.id === id);
-    return sim || null;
-  }
-
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 
@@ -213,10 +145,6 @@ export async function getSimById(id: string): Promise<Sim | null> {
 }
 
 export async function getFeaturedSims(limit = 8): Promise<Sim[]> {
-  if (!isSupabaseConfigured()) {
-    return MOCK_SIMS.filter((s) => s.is_featured && !s.is_sold).slice(0, limit);
-  }
-
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 
@@ -237,10 +165,6 @@ export async function getFeaturedSims(limit = 8): Promise<Sim[]> {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  if (!isSupabaseConfigured()) {
-    return MOCK_CATEGORIES as Category[];
-  }
-
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 
@@ -254,18 +178,6 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getFilterCounts() {
-  if (!isSupabaseConfigured()) {
-    const available = MOCK_SIMS.filter((s) => !s.is_sold);
-    return {
-      carriers: {
-        viettel: available.filter((s) => s.carrier === "viettel").length,
-        vinaphone: available.filter((s) => s.carrier === "vinaphone").length,
-        mobifone: available.filter((s) => s.carrier === "mobifone").length,
-      },
-      totalAvailable: available.length,
-    };
-  }
-
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 
@@ -287,14 +199,6 @@ export async function getFilterCounts() {
 }
 
 export async function getRelatedSims(simId: string, limit = 8): Promise<Sim[]> {
-  if (!isSupabaseConfigured()) {
-    const currentSim = MOCK_SIMS.find((s) => s.id === simId);
-    if (!currentSim) return [];
-    return MOCK_SIMS.filter(
-      (s) => s.id !== simId && !s.is_sold && s.carrier === currentSim.carrier && s.category_id === currentSim.category_id
-    ).slice(0, limit);
-  }
-
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 

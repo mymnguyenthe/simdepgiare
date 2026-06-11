@@ -16,20 +16,29 @@ interface SimCardProps {
 }
 
 export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
-  const carrierColors = {
+  const carrierNames: Record<string, string> = {
+    viettel: "Viettel",
+    vinaphone: "VinaPhone",
+    mobifone: "MobiFone",
+    other: "Khác",
+  };
+
+  const carrierColors: Record<string, string> = {
     viettel: "neon-viettel",
     vinaphone: "neon-vinaphone",
     mobifone: "neon-mobifone",
+    other: "text-text-secondary",
   };
 
-  const carrierVariant = sim.carrier as keyof typeof carrierColors;
-  const colorClass = carrierColors[carrierVariant] || "neon-viettel";
+  const carrierKey = sim.carrier.toLowerCase();
+  const colorClass = carrierColors[carrierKey] || "text-text-secondary";
+  const carrierName = carrierNames[carrierKey] || sim.carrier;
 
   return (
-    <Link href={`/sims/${sim.id}`}>
+    <Link href={`/sims/${sim.id}`} className="block">
       <div
         className={cn(
-          "gold-neon-card relative rounded-lg p-6 cursor-pointer",
+          "gold-neon-card relative rounded-lg p-6 cursor-pointer h-full flex flex-col",
           "animate-fade-up",
           className
         )}
@@ -38,7 +47,7 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
         {/* Carrier badge */}
         <div className="mb-4">
           <span className={cn("text-sm font-bold uppercase tracking-wider", colorClass)}>
-            {sim.carrier}
+            {carrierName}
           </span>
         </div>
 

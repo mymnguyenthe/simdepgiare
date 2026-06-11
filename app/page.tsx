@@ -88,7 +88,7 @@ export default async function HomePage() {
                 SIM CHÍNH CHỦ
               </h3>
               <p className="text-sm text-text-secondary">
-                100% sim chính chủ, sang tên ngay trong ngày
+                Đăng ký thông tin chính chủ 100%
               </p>
             </div>
             <div className="flex flex-col items-center text-center p-6 gold-neon-card rounded-lg">

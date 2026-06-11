@@ -1,5 +1,6 @@
 import { SimFilter } from "@/components/sim/sim-filter";
 import { SimGrid } from "@/components/sim/sim-grid";
+import { Pagination } from "@/components/pagination";
 import { getCategories, getFilterCounts, getSims } from "@/lib/api/sims";
 import { Suspense } from "react";
 
@@ -72,23 +73,11 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
             </Suspense>
 
             {/* Pagination */}
-            {simsResult.totalPages > 1 && (
-              <div className="mt-12 flex justify-center gap-3">
-                {Array.from({ length: simsResult.totalPages }).map((_, i) => (
-                  <a
-                    key={i}
-                    href={`/sims?page=${i + 1}${carrier ? `&carrier=${carrier.join(",")}` : ""}${categoryId ? `&category=${categoryId.join(",")}` : ""}${search ? `&search=${search}` : ""}`}
-                    className={`w-12 h-12 flex items-center justify-center rounded-lg border-2 font-bold transition-all ${
-                      page === i + 1
-                        ? "neon-border-gold bg-gold-glow/10 neon-text-gold"
-                        : "border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold"
-                    }`}
-                  >
-                    {i + 1}
-                  </a>
-                ))}
-              </div>
-            )}
+            <Pagination
+              currentPage={page}
+              totalPages={simsResult.totalPages}
+              baseUrl={`/sims${carrier ? `?carrier=${carrier.join(",")}` : ""}${categoryId ? `${carrier ? "&" : "?"}category=${categoryId.join(",")}` : ""}${search ? `${carrier || categoryId ? "&" : "?"}search=${search}` : ""}`}
+            />
           </div>
         </div>
       </div>

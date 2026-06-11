@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Search, Phone, Shield, Award, TrendingUp } from "lucide-react";
+import { Phone, Shield, Award, TrendingUp } from "lucide-react";
 import { GoldButton } from "@/components/ui/gold-button";
+import { SearchBar } from "@/components/search-bar";
 import { SimGrid } from "@/components/sim/sim-grid";
 import { getFeaturedSims, getCategories } from "@/lib/api/sims";
 
@@ -19,29 +20,15 @@ export default async function HomePage() {
             <h1 className="font-montserrat text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
               <span className="neon-text-gold-strong">KHO SIM SỐ</span>
               <br />
-              <span className="text-text-primary">ĐẸP GIÁ RẺ</span>
+              <span className="text-text-primary">ĐẸP GIÁ R</span>
             </h1>
             <p className="mt-6 text-lg text-text-secondary max-w-2xl mx-auto">
               Mua bán sim số đẹp chính chủ, cam kết giá tốt nhất thị trường.
               Sim Viettel, VinaPhone, MobiFone đa dạng loại hình.
             </p>
 
-            {/* Search Bar */}
-            <div className="mt-10 max-w-2xl mx-auto">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold-primary" />
-                <input
-                  type="text"
-                  placeholder="Tìm sim theo số (VD: 0987, 6868, 9999...)"
-                  className="w-full h-14 pl-12 pr-32 rounded-md border border-gold-border-strong bg-surface-elevated text-text-primary placeholder:text-text-muted focus:outline-none focus:border-gold-neon focus:shadow-[0_0_20px_rgba(255,215,0,0.25)] transition-all"
-                />
-                <Link href="/sims">
-                  <GoldButton className="absolute right-2 top-1/2 -translate-y-1/2">
-                    Tìm Kiếm
-                  </GoldButton>
-                </Link>
-              </div>
-            </div>
+            {/* Search Bar — client component */}
+            <SearchBar />
           </div>
         </div>
       </section>

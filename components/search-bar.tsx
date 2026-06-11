@@ -1,7 +1,6 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { GoldButton } from "@/components/ui/gold-button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -29,9 +28,12 @@ export function SearchBar() {
           placeholder="Tìm sim theo số (VD: 0987, 6868, 9999...)"
           className="w-full h-14 pl-12 pr-32 rounded-md border border-gold-border-strong bg-surface-elevated text-text-primary placeholder:text-text-muted focus:outline-none focus:border-gold-neon focus:shadow-[0_0_20px_rgba(255,215,0,0.25)] transition-all"
         />
-        <GoldButton type="submit" className="absolute right-2 top-1/2 -translate-y-1/2">
+        <button
+          type="submit"
+          className="absolute right-2 top-1/2 -translate-y-1/2 gold-neon-btn px-6 py-3 rounded-md text-sm font-bold"
+        >
           Tìm Kiếm
-        </GoldButton>
+        </button>
       </div>
     </form>
   );

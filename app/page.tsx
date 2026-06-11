@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { Phone, Shield, Award, TrendingUp } from "lucide-react";
-import { GoldButton } from "@/components/ui/gold-button";
 import { SearchBar } from "@/components/search-bar";
 import { SimGrid } from "@/components/sim/sim-grid";
-import { getFeaturedSims, getCategories } from "@/lib/api/sims";
+import { GoldButton } from "@/components/ui/gold-button";
+import { getCategories, getFeaturedSims } from "@/lib/api/sims";
+import { Award, Phone, Shield, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 export default async function HomePage() {
   const [featuredSims, categories] = await Promise.all([
@@ -18,9 +18,8 @@ export default async function HomePage() {
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="font-montserrat text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
-              <span className="neon-text-gold-strong">KHO SIM SỐ</span>
-              <br />
-              <span className="text-text-primary">ĐẸP GIÁ R</span>
+              <span className="neon-text-gold-strong block mb-5">KHO SIM SỐ</span>
+              <span className="text-text-primary">ĐẸP GIÁ RẺ</span>
             </h1>
             <p className="mt-6 text-lg text-text-secondary max-w-2xl mx-auto">
               Mua bán sim số đẹp chính chủ, cam kết giá tốt nhất thị trường.

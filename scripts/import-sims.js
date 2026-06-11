@@ -9,17 +9,27 @@ const supabase = createClient(
 
 // Mapping đầu số theo nhà mạng
 function getCarrier(phone) {
-  const prefix = phone.substring(0, 3);
+  const prefix3 = phone.substring(0, 3);
+  const prefix4 = phone.substring(0, 4);
+
+  // Check 4-digit prefixes first (more specific)
+  const vinaphone4 = ['0818'];
+  const vietnamobile4 = ['0923', '0565', '0522'];
+
+  if (vinaphone4.includes(prefix4)) return 'vinaphone';
+  if (vietnamobile4.includes(prefix4)) return 'vietnamobile';
+
+  // Then check 3-digit prefixes
   const viettel = ['086', '096', '097', '098', '032', '033', '034', '035', '036', '037', '038', '039'];
   const vinaphone = ['088', '091', '094', '083', '084', '085'];
-  const mobifone = ['089', '090', '093', '070', '076', '077', '078', '079', '081'];
-  const vietnamobile = ['092', '056', '052', '058', '0923', '0565', '0522'];
+  const mobifone = ['089', '090', '093', '070', '076', '077', '078', '079'];
+  const vietnamobile = ['092', '056', '052', '058'];
 
-  if (viettel.includes(prefix)) return 'viettel';
-  if (vinaphone.includes(prefix)) return 'vinaphone';
-  if (mobifone.includes(prefix)) return 'mobifone';
-  if (vietnamobile.includes(prefix)) return 'vietnamobile';
-  return 'vietnamobile'; // Default to vietnamobile for unknown prefixes
+  if (viettel.includes(prefix3)) return 'viettel';
+  if (vinaphone.includes(prefix3)) return 'vinaphone';
+  if (mobifone.includes(prefix3)) return 'mobifone';
+  if (vietnamobile.includes(prefix3)) return 'vietnamobile';
+  return 'vietnamobile';
 }
 
 // Đọc file và parse data

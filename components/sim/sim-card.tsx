@@ -68,8 +68,11 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
           </span>
         )}
 
-        {/* CTA */}
-        <button className="gold-neon-btn w-full py-3 rounded-md text-sm">
+        {/* Spacer to push button to bottom */}
+        <div className="flex-1" />
+
+        {/* CTA - Fixed at bottom */}
+        <button className="gold-neon-btn w-full py-3 rounded-md text-sm mt-auto">
           Mua ngay
         </button>
 

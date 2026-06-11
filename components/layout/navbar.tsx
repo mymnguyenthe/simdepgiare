@@ -23,7 +23,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Phone className="h-6 w-6 text-gold-primary" />
-            <span className="font-cormorant text-2xl font-semibold text-shimmer-gold">
+            <span className="font-montserrat text-2xl font-semibold text-shimmer-gold">
               SimDepGiaRe
             </span>
           </Link>

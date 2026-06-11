@@ -96,7 +96,7 @@ export default function ThemSimPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-cormorant font-bold text-gold-primary">Thêm Sim Mới</h1>
+        <h1 className="text-3xl font-montserrat font-bold text-gold-primary">Thêm Sim Mới</h1>
         <p className="text-text-secondary mt-2">Nhập thông tin sim cần thêm vào hệ thống</p>
       </div>
 

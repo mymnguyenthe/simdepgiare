@@ -49,7 +49,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
 
             {/* Sim Number */}
             <div>
-              <h1 className="font-playfair text-5xl font-bold text-text-primary mb-4">
+              <h1 className="font-montserrat text-5xl font-bold text-text-primary mb-4">
                 {formatPhoneNumber(sim.phone_number)}
               </h1>
               <p className="text-3xl font-bold text-shimmer-gold">
@@ -68,7 +68,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
             {/* Description */}
             {sim.description && (
               <div>
-                <h2 className="font-cormorant text-2xl font-semibold text-text-primary mb-4">
+                <h2 className="font-montserrat text-2xl font-semibold text-text-primary mb-4">
                   Mô tả
                 </h2>
                 <p className="text-text-secondary leading-relaxed">
@@ -80,7 +80,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
             {/* Feng Shui */}
             {sim.feng_shui && (
               <div>
-                <h2 className="font-cormorant text-2xl font-semibold text-text-primary mb-4 flex items-center gap-2">
+                <h2 className="font-montserrat text-2xl font-semibold text-text-primary mb-4 flex items-center gap-2">
                   <Sparkles className="h-6 w-6 text-gold-primary" />
                   Ý nghĩa phong thủy
                 </h2>
@@ -95,7 +95,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
           <div>
             <div className="sticky top-24 space-y-6 p-8 rounded-sm border border-gold-border bg-surface">
               <div>
-                <h3 className="font-cormorant text-2xl font-semibold text-text-primary mb-2">
+                <h3 className="font-montserrat text-2xl font-semibold text-text-primary mb-2">
                   Mua sim này
                 </h3>
                 <p className="text-sm text-text-secondary">
@@ -133,7 +133,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
         {/* Related Sims */}
         {relatedSims.length > 0 && (
           <div className="mt-20">
-            <h2 className="font-cormorant text-3xl font-semibold text-text-primary mb-8">
+            <h2 className="font-montserrat text-3xl font-semibold text-text-primary mb-8">
               Sim liên quan
             </h2>
             <SimGrid sims={relatedSims} />

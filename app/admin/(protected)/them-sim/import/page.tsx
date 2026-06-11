@@ -134,7 +134,7 @@ export default function ImportPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-cormorant font-bold text-gold-primary">Import Sim Từ CSV</h1>
+        <h1 className="text-3xl font-montserrat font-bold text-gold-primary">Import Sim Từ CSV</h1>
         <p className="text-text-secondary mt-2">Tải lên file CSV để thêm nhiều sim cùng lúc</p>
       </div>
 

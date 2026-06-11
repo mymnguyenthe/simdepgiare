@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Phone className="h-6 w-6 text-gold-primary" />
-              <span className="font-cormorant text-2xl font-semibold text-shimmer-gold">
+              <span className="font-montserrat text-2xl font-semibold text-shimmer-gold">
                 SimDepGiaRe
               </span>
             </div>
@@ -21,7 +21,7 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h3 className="font-cormorant text-lg font-semibold text-gold-primary mb-4">
+            <h3 className="font-montserrat text-lg font-semibold text-gold-primary mb-4">
               Liên Kết
             </h3>
             <ul className="space-y-2">
@@ -40,7 +40,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-cormorant text-lg font-semibold text-gold-primary mb-4">
+            <h3 className="font-montserrat text-lg font-semibold text-gold-primary mb-4">
               Liên Hệ
             </h3>
             <ul className="space-y-3">

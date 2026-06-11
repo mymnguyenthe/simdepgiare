@@ -27,7 +27,7 @@ export default function CartPage() {
       <div className="pt-16 min-h-screen flex items-center justify-center">
         <div className="text-center space-y-6">
           <CheckCircle className="h-20 w-20 text-success mx-auto" />
-          <h1 className="font-cormorant text-4xl font-bold text-text-primary">
+          <h1 className="font-montserrat text-4xl font-bold text-text-primary">
             Đặt hàng thành công!
           </h1>
           <p className="text-text-secondary max-w-md mx-auto">
@@ -45,7 +45,7 @@ export default function CartPage() {
     <div className="pt-16">
       <div className="border-b border-gold-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-cormorant text-5xl font-bold text-text-primary">
+          <h1 className="font-montserrat text-5xl font-bold text-text-primary">
             Đặt Hàng
           </h1>
           <p className="mt-4 text-text-secondary">

@@ -37,7 +37,7 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
       {/* Hero section */}
       <div className="border-b border-gold-border-strong bg-surface/50 backdrop-blur-sm">
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="font-orbitron text-6xl font-black neon-text-gold-strong mb-4 tracking-wider">
+          <h1 className="font-montserrat text-6xl font-black neon-text-gold-strong mb-4 tracking-wider">
             KHO SIM SỐ
           </h1>
           <p className="text-xl text-text-secondary font-light">

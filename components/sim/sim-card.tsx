@@ -43,7 +43,7 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
         </div>
 
         {/* Sim number — Orbitron font */}
-        <h3 className="font-orbitron text-2xl font-bold text-text-primary mb-3 tracking-wider">
+        <h3 className="font-montserrat text-2xl font-bold text-text-primary mb-3 tracking-wider">
           {formatPhoneNumber(sim.phone_number)}
         </h3>
 

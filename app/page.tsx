@@ -15,7 +15,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden border-b border-gold-border-strong bg-linear-to-b from-surface to-background py-24">
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="font-orbitron text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="font-montserrat text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
               <span className="neon-text-gold-strong">KHO SIM SỐ</span>
               <br />
               <span className="text-text-primary">ĐẸP GIÁ RẺ</span>
@@ -48,7 +48,7 @@ export default async function HomePage() {
       {/* Categories Section */}
       <section className="py-20 border-b border-gold-border">
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
-          <h2 className="font-orbitron text-4xl font-bold text-center neon-text-gold mb-12 tracking-wider">
+          <h2 className="font-montserrat text-4xl font-bold text-center neon-text-gold mb-12 tracking-wider">
             DANH MỤC SIM
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -73,7 +73,7 @@ export default async function HomePage() {
       <section className="py-20 border-b border-gold-border">
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
-            <h2 className="font-orbitron text-4xl font-bold neon-text-gold tracking-wider">
+            <h2 className="font-montserrat text-4xl font-bold neon-text-gold tracking-wider">
               SIM NỔI BẬT
             </h2>
             <Link href="/sims">
@@ -89,7 +89,7 @@ export default async function HomePage() {
       {/* Why Choose Us */}
       <section className="py-20">
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
-          <h2 className="font-orbitron text-4xl font-bold text-center neon-text-gold mb-12 tracking-wider">
+          <h2 className="font-montserrat text-4xl font-bold text-center neon-text-gold mb-12 tracking-wider">
             TẠI SAO CHỌN CHÚNG TÔI
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -97,7 +97,7 @@ export default async function HomePage() {
               <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
                 <Phone className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+              <h3 className="font-montserrat text-xl font-bold text-text-primary mb-2 tracking-wide">
                 SIM CHÍNH CHỦ
               </h3>
               <p className="text-sm text-text-secondary">
@@ -108,7 +108,7 @@ export default async function HomePage() {
               <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
                 <Shield className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+              <h3 className="font-montserrat text-xl font-bold text-text-primary mb-2 tracking-wide">
                 BẢO HÀNH TRỌN ĐỜI
               </h3>
               <p className="text-sm text-text-secondary">
@@ -119,7 +119,7 @@ export default async function HomePage() {
               <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
                 <Award className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+              <h3 className="font-montserrat text-xl font-bold text-text-primary mb-2 tracking-wide">
                 GIÁ TỐT NHẤT
               </h3>
               <p className="text-sm text-text-secondary">
@@ -130,7 +130,7 @@ export default async function HomePage() {
               <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
                 <TrendingUp className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+              <h3 className="font-montserrat text-xl font-bold text-text-primary mb-2 tracking-wide">
                 ĐA DẠNG LOẠI HÌNH
               </h3>
               <p className="text-sm text-text-secondary">

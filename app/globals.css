@@ -30,10 +30,9 @@
   --color-error: #EF4444;
 
   /* Fonts */
-  --font-cormorant: var(--font-cormorant), "Cormorant Garamond", serif;
-  --font-be-vietnam: var(--font-be-vietnam), "Be Vietnam Pro", sans-serif;
-  --font-playfair: var(--font-playfair), "Playfair Display", serif;
-  --font-orbitron: "Orbitron", sans-serif;
+  --font-inter: var(--font-inter), "Inter", sans-serif;
+  --font-montserrat: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-nunito: var(--font-nunito), "Nunito", sans-serif;
 
   /* Animations */
   --animate-shimmer: shimmer 3s ease-in-out infinite;
@@ -88,7 +87,7 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-text-primary);
-  font-family: var(--font-be-vietnam);
+  font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

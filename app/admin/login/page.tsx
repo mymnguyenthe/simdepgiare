@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-cormorant font-bold text-gold-primary">
+          <h1 className="text-3xl font-montserrat font-bold text-gold-primary">
             Admin Panel
           </h1>
           <p className="mt-2 text-text-secondary">Đăng nhập để quản lý sim</p>

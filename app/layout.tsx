@@ -1,33 +1,29 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Be_Vietnam_Pro, Playfair_Display, Orbitron } from "next/font/google";
+import { Inter, Montserrat, Nunito } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+// Inter - font chính cho body text, hỗ trợ tiếng Việt xuất sắc
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const beVietnam = Be_Vietnam_Pro({
-  variable: "--font-be-vietnam",
+// Montserrat - font cho tiêu đề, hiện đại và dễ đọc tiếng Việt
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+// Nunito - font phụ cho các element đặc biệt, rounded và thân thiện
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
-
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
-  subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
@@ -46,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="vi" className="dark">
       <body
-        className={`${cormorant.variable} ${beVietnam.variable} ${playfair.variable} ${orbitron.variable} font-be-vietnam min-h-screen flex flex-col antialiased`}
+        className={`${inter.variable} ${montserrat.variable} ${nunito.variable} font-inter min-h-screen flex flex-col antialiased`}
       >
         <div className="noise-overlay" />
         <Navbar />

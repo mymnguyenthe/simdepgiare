@@ -25,7 +25,7 @@ export default function ContactPage() {
       <div className="pt-16 min-h-screen flex items-center justify-center">
         <div className="text-center space-y-6">
           <CheckCircle className="h-20 w-20 text-success mx-auto" />
-          <h1 className="font-cormorant text-4xl font-bold text-text-primary">
+          <h1 className="font-montserrat text-4xl font-bold text-text-primary">
             Đã gửi tin nhắn!
           </h1>
           <p className="text-text-secondary max-w-md mx-auto">
@@ -43,7 +43,7 @@ export default function ContactPage() {
     <div className="pt-16">
       <div className="border-b border-gold-border bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-cormorant text-5xl font-bold text-text-primary">
+          <h1 className="font-montserrat text-5xl font-bold text-text-primary">
             Liên Hệ
           </h1>
           <p className="mt-4 text-text-secondary">
@@ -56,7 +56,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div>
-            <h2 className="font-cormorant text-3xl font-semibold text-text-primary mb-8">
+            <h2 className="font-montserrat text-3xl font-semibold text-text-primary mb-8">
               Gửi tin nhắn
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -110,7 +110,7 @@ export default function ContactPage() {
 
           {/* Contact Info */}
           <div>
-            <h2 className="font-cormorant text-3xl font-semibold text-text-primary mb-8">
+            <h2 className="font-montserrat text-3xl font-semibold text-text-primary mb-8">
               Thông tin liên hệ
             </h2>
             <div className="space-y-6">
@@ -119,7 +119,7 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 text-gold-primary" />
                 </div>
                 <div>
-                  <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-1">
+                  <h3 className="font-montserrat text-xl font-semibold text-text-primary mb-1">
                     Điện thoại
                   </h3>
                   <p className="text-text-secondary">0945 556 789</p>
@@ -131,7 +131,7 @@ export default function ContactPage() {
                   <Clock className="h-6 w-6 text-gold-primary" />
                 </div>
                 <div>
-                  <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-1">
+                  <h3 className="font-montserrat text-xl font-semibold text-text-primary mb-1">
                     Giờ làm việc
                   </h3>
                   <p className="text-text-secondary">

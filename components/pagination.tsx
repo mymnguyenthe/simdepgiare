@@ -1,17 +1,23 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  baseUrl: string;
 }
 
-export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps) {
+export function Pagination({ currentPage, totalPages }: PaginationProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) return null;
 
-  const getHref = (page: number) => {
-    const separator = baseUrl.includes("?") ? "&" : "?";
-    return `${baseUrl}${separator}page=${page}`;
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    router.push(`/sims?${params.toString()}`);
   };
 
   // Generate page numbers with ellipsis
@@ -54,13 +60,13 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
     <div className="mt-12 flex items-center justify-center gap-2 flex-wrap">
       {/* Previous Button */}
       {currentPage > 1 && (
-        <a
-          href={getHref(currentPage - 1)}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
           className="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold transition-all"
           aria-label="Previous page"
         >
-
-        </a>
+          ‹
+        </button>
       )}
 
       {/* Page Numbers */}
@@ -73,9 +79,9 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
             ...
           </span>
         ) : (
-          <a
+          <button
             key={page}
-            href={getHref(page)}
+            onClick={() => handlePageChange(page)}
             className={cn(
               "w-12 h-12 flex items-center justify-center rounded-lg border-2 font-bold transition-all",
               page === currentPage
@@ -84,19 +90,19 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
             )}
           >
             {page}
-          </a>
+          </button>
         )
       )}
 
       {/* Next Button */}
       {currentPage < totalPages && (
-        <a
-          href={getHref(currentPage + 1)}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
           className="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold transition-all"
           aria-label="Next page"
         >
           ›
-        </a>
+        </button>
       )}
     </div>
   );

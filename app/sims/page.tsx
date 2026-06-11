@@ -76,7 +76,6 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
             <Pagination
               currentPage={page}
               totalPages={simsResult.totalPages}
-              baseUrl={`/sims${carrier ? `?carrier=${carrier.join(",")}` : ""}${categoryId ? `${carrier ? "&" : "?"}category=${categoryId.join(",")}` : ""}${search ? `${carrier || categoryId ? "&" : "?"}search=${search}` : ""}`}
             />
           </div>
         </div>

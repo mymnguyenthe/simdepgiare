@@ -121,7 +121,7 @@ export function SimFilter({ categories, filterCounts, currentFilters }: SimFilte
                     : [...current, carrier.value];
                   updateFilters("carrier", next.length > 0 ? next : undefined);
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-md border text-sm font-medium transition-all ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-md border text-sm font-medium transition-all cursor-pointer ${
                   isSelected
                     ? "neon-border-gold bg-gold-glow/10 neon-text-gold"
                     : "border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold"
@@ -153,7 +153,7 @@ export function SimFilter({ categories, filterCounts, currentFilters }: SimFilte
                     : [...current, category.id];
                   updateFilters("category", next.length > 0 ? next : undefined);
                 }}
-                className={`w-full flex items-center gap-2 px-3 py-2 rounded-md border text-sm text-left transition-all ${
+                className={`w-full flex items-center gap-2 px-3 py-2 rounded-md border text-sm text-left transition-all cursor-pointer ${
                   isSelected
                     ? "neon-border-gold bg-gold-glow/10 neon-text-gold"
                     : "border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold"
@@ -171,7 +171,7 @@ export function SimFilter({ categories, filterCounts, currentFilters }: SimFilte
       {hasFilters && (
         <button
           onClick={clearFilters}
-          className="w-full py-3 rounded-md border-2 border-gold-border-strong text-gold-primary font-bold uppercase tracking-wider hover:neon-border-gold hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all"
+          className="w-full py-3 rounded-md border-2 border-gold-border-strong text-gold-primary font-bold uppercase tracking-wider hover:neon-border-gold hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all cursor-pointer"
         >
           <X className="inline h-4 w-4 mr-2" />
           Xóa bộ lọc

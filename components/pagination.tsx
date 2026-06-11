@@ -62,7 +62,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
       {currentPage > 1 && (
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          className="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold transition-all"
+          className="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold transition-all cursor-pointer"
           aria-label="Previous page"
         >
           ‹
@@ -83,7 +83,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
             key={page}
             onClick={() => handlePageChange(page)}
             className={cn(
-              "w-12 h-12 flex items-center justify-center rounded-lg border-2 font-bold transition-all",
+              "w-12 h-12 flex items-center justify-center rounded-lg border-2 font-bold transition-all cursor-pointer",
               page === currentPage
                 ? "neon-border-gold bg-gold-glow/10 neon-text-gold"
                 : "border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold"
@@ -98,7 +98,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
       {currentPage < totalPages && (
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          className="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold transition-all"
+          className="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold transition-all cursor-pointer"
           aria-label="Next page"
         >
           ›

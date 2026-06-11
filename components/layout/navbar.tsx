@@ -21,7 +21,7 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 cursor-pointer">
             <Phone className="h-6 w-6 text-gold-primary" />
             <span className="font-montserrat text-2xl font-semibold text-shimmer-gold">
               SimDepGiaRe
@@ -35,7 +35,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors duration-300",
+                  "text-sm font-medium transition-colors duration-300 cursor-pointer",
                   pathname === link.href
                     ? "text-gold-primary"
                     : "text-text-secondary hover:text-gold-primary"
@@ -49,7 +49,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-text-primary hover:text-gold-primary transition-colors"
+            className="md:hidden text-text-primary hover:text-gold-primary transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -65,7 +65,7 @@ export function Navbar() {
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "block py-2 text-sm font-medium transition-colors",
+                  "block py-2 text-sm font-medium transition-colors cursor-pointer",
                   pathname === link.href
                     ? "text-gold-primary"
                     : "text-text-secondary hover:text-gold-primary"

@@ -43,7 +43,7 @@ export default async function HomePage() {
               <Link
                 key={category.id}
                 href={`/sims?category=${category.id}`}
-                className="group flex flex-col items-center gap-3 p-6 rounded-lg gold-neon-card transition-all duration-300 opacity-0 animate-fade-up"
+                className="group flex flex-col items-center gap-3 p-6 rounded-lg gold-neon-card transition-all duration-300 opacity-0 animate-fade-up cursor-pointer"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <span className="text-4xl">{category.icon}</span>

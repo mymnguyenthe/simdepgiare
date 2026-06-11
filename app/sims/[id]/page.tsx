@@ -28,7 +28,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <Link
             href="/sims"
-            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-gold-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-gold-primary transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
             Quay lại danh sách

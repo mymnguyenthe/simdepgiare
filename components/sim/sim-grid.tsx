@@ -14,7 +14,7 @@ interface SimGridProps {
 export function SimGrid({ sims }: SimGridProps) {
   if (sims.length === 0) {
     return (
-      <div className="text-center py-24 neon-card rounded-lg">
+      <div className="text-center py-24 gold-neon-card rounded-lg">
         <p className="text-text-secondary text-lg mb-2">
           Không tìm thấy sim nào phù hợp
         </p>

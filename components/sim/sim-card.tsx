@@ -17,19 +17,19 @@ interface SimCardProps {
 
 export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
   const carrierColors = {
-    viettel: "neon-text-cyan",
-    vinaphone: "neon-text-magenta",
-    mobifone: "neon-text-purple",
+    viettel: "neon-viettel",
+    vinaphone: "neon-vinaphone",
+    mobifone: "neon-mobifone",
   };
 
   const carrierVariant = sim.carrier as keyof typeof carrierColors;
-  const colorClass = carrierColors[carrierVariant] || "neon-text-cyan";
+  const colorClass = carrierColors[carrierVariant] || "neon-viettel";
 
   return (
     <Link href={`/sims/${sim.id}`}>
       <div
         className={cn(
-          "neon-card relative rounded-lg p-6 cursor-pointer",
+          "gold-neon-card relative rounded-lg p-6 cursor-pointer",
           "opacity-0 animate-fade-up",
           className
         )}
@@ -47,8 +47,8 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
           {formatPhoneNumber(sim.phone_number)}
         </h3>
 
-        {/* Price — cyber gradient */}
-        <p className="text-2xl font-bold cyber-gradient-text mb-4">
+        {/* Price — gold neon */}
+        <p className="text-2xl font-bold neon-text-gold mb-4">
           {formatPrice(sim.price)}
         </p>
 
@@ -60,13 +60,13 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
         )}
 
         {/* CTA */}
-        <button className="neon-button w-full py-3 rounded-md text-sm">
+        <button className="gold-neon-btn w-full py-3 rounded-md text-sm">
           Mua ngay
         </button>
 
         {/* Featured glow effect */}
         {sim.is_featured && (
-          <div className="absolute inset-0 rounded-lg neon-border-cyan pointer-events-none opacity-50" />
+          <div className="absolute inset-0 rounded-lg neon-border-gold pointer-events-none opacity-60" />
         )}
       </div>
     </Link>

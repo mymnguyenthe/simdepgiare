@@ -49,7 +49,6 @@ export default function RootLayout({
         className={`${cormorant.variable} ${beVietnam.variable} ${playfair.variable} ${orbitron.variable} font-be-vietnam min-h-screen flex flex-col antialiased`}
       >
         <div className="noise-overlay" />
-        <div className="scan-line" />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

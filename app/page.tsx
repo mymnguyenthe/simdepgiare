@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Search, Phone, Shield, Award, TrendingUp } from "lucide-react";
-import { GoldButton } from "@/components/ui/gold-button";
 import { SimGrid } from "@/components/sim/sim-grid";
 import { getFeaturedSims, getCategories } from "@/lib/api/sims";
 
@@ -13,13 +12,13 @@ export default async function HomePage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-gold-border bg-gradient-to-b from-surface to-background py-24">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden border-b border-gold-border-strong bg-linear-to-b from-surface to-background py-24">
+        <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="font-cormorant text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              <span className="text-shimmer-gold">Kho Sim Số Đẹp</span>
+            <h1 className="font-orbitron text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
+              <span className="neon-text-gold-strong">KHO SIM SỐ</span>
               <br />
-              <span className="text-text-primary">Giá Rẻ</span>
+              <span className="text-text-primary">ĐẸP GIÁ RẺ</span>
             </h1>
             <p className="mt-6 text-lg text-text-secondary max-w-2xl mx-auto">
               Mua bán sim số đẹp chính chủ, cam kết giá tốt nhất thị trường.
@@ -29,16 +28,16 @@ export default async function HomePage() {
             {/* Search Bar */}
             <div className="mt-10 max-w-2xl mx-auto">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-text-muted" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold-primary" />
                 <input
                   type="text"
                   placeholder="Tìm sim theo số (VD: 0987, 6868, 9999...)"
-                  className="w-full h-14 pl-12 pr-32 rounded-sm border border-gold-border bg-surface-elevated text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-gold-primary/50 focus:border-gold-primary transition-all"
+                  className="w-full h-14 pl-12 pr-32 rounded-md border border-gold-border-strong bg-surface-elevated text-text-primary placeholder:text-text-muted focus:outline-none focus:border-gold-neon focus:shadow-[0_0_20px_rgba(255,215,0,0.25)] transition-all"
                 />
                 <Link href="/sims">
-                  <GoldButton className="absolute right-2 top-1/2 -translate-y-1/2">
+                  <button className="gold-neon-btn absolute right-2 top-1/2 -translate-y-1/2 px-6 py-3 rounded-md">
                     Tìm Kiếm
-                  </GoldButton>
+                  </button>
                 </Link>
               </div>
             </div>
@@ -48,20 +47,20 @@ export default async function HomePage() {
 
       {/* Categories Section */}
       <section className="py-20 border-b border-gold-border">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <h2 className="font-cormorant text-4xl font-semibold text-center text-text-primary mb-12">
-            Danh Mục Sim
+        <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
+          <h2 className="font-orbitron text-4xl font-bold text-center neon-text-gold mb-12 tracking-wider">
+            DANH MỤC SIM
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {categories.slice(0, 8).map((category, index) => (
               <Link
                 key={category.id}
                 href={`/sims?category=${category.id}`}
-                className="group flex flex-col items-center gap-3 p-6 rounded-sm border border-gold-border bg-surface hover:gold-glow-hover transition-all duration-300 opacity-0 animate-fade-up"
+                className="group flex flex-col items-center gap-3 p-6 rounded-lg gold-neon-card transition-all duration-300 opacity-0 animate-fade-up"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <span className="text-4xl">{category.icon}</span>
-                <span className="text-sm font-medium text-text-primary group-hover:text-gold-primary transition-colors">
+                <span className="text-sm font-medium text-text-primary group-hover:neon-text-gold transition-all">
                   {category.name}
                 </span>
               </Link>
@@ -72,13 +71,15 @@ export default async function HomePage() {
 
       {/* Featured Sims */}
       <section className="py-20 border-b border-gold-border">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
-            <h2 className="font-cormorant text-4xl font-semibold text-text-primary">
-              Sim Nổi Bật
+            <h2 className="font-orbitron text-4xl font-bold neon-text-gold tracking-wider">
+              SIM NỔI BẬT
             </h2>
             <Link href="/sims">
-              <GoldButton variant="secondary">Xem Tất Cả</GoldButton>
+              <button className="gold-neon-btn-outline px-6 py-3 rounded-md">
+                Xem Tất Cả
+              </button>
             </Link>
           </div>
           <SimGrid sims={featuredSims} />
@@ -87,50 +88,50 @@ export default async function HomePage() {
 
       {/* Why Choose Us */}
       <section className="py-20">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <h2 className="font-cormorant text-4xl font-semibold text-center text-text-primary mb-12">
-            Tại Sao Chọn Chúng Tôi
+        <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
+          <h2 className="font-orbitron text-4xl font-bold text-center neon-text-gold mb-12 tracking-wider">
+            TẠI SAO CHỌN CHÚNG TÔI
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="flex flex-col items-center text-center p-6">
-              <div className="w-16 h-16 rounded-full bg-gold-primary/10 flex items-center justify-center mb-4">
-                <Phone className="h-8 w-8 text-gold-primary" />
+            <div className="flex flex-col items-center text-center p-6 gold-neon-card rounded-lg">
+              <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
+                <Phone className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-2">
-                Sim Chính Chủ
+              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+                SIM CHÍNH CHỦ
               </h3>
               <p className="text-sm text-text-secondary">
                 100% sim chính chủ, sang tên ngay trong ngày
               </p>
             </div>
-            <div className="flex flex-col items-center text-center p-6">
-              <div className="w-16 h-16 rounded-full bg-gold-primary/10 flex items-center justify-center mb-4">
-                <Shield className="h-8 w-8 text-gold-primary" />
+            <div className="flex flex-col items-center text-center p-6 gold-neon-card rounded-lg">
+              <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
+                <Shield className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-2">
-                Bảo Hành Trọn Đời
+              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+                BẢO HÀNH TRỌN ĐỜI
               </h3>
               <p className="text-sm text-text-secondary">
                 Cam kết bảo hành sim trọn đời, hỗ trợ 24/7
               </p>
             </div>
-            <div className="flex flex-col items-center text-center p-6">
-              <div className="w-16 h-16 rounded-full bg-gold-primary/10 flex items-center justify-center mb-4">
-                <Award className="h-8 w-8 text-gold-primary" />
+            <div className="flex flex-col items-center text-center p-6 gold-neon-card rounded-lg">
+              <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
+                <Award className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-2">
-                Giá Tốt Nhất
+              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+                GIÁ TỐT NHẤT
               </h3>
               <p className="text-sm text-text-secondary">
                 Giá cạnh tranh nhất thị trường, không qua trung gian
               </p>
             </div>
-            <div className="flex flex-col items-center text-center p-6">
-              <div className="w-16 h-16 rounded-full bg-gold-primary/10 flex items-center justify-center mb-4">
-                <TrendingUp className="h-8 w-8 text-gold-primary" />
+            <div className="flex flex-col items-center text-center p-6 gold-neon-card rounded-lg">
+              <div className="w-16 h-16 rounded-full bg-gold-glow/20 flex items-center justify-center mb-4">
+                <TrendingUp className="h-8 w-8 text-gold-neon" />
               </div>
-              <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-2">
-                Đa Dạng Loại Hình
+              <h3 className="font-orbitron text-xl font-bold text-text-primary mb-2 tracking-wide">
+                ĐA DẠNG LOẠI HÌNH
               </h3>
               <p className="text-sm text-text-secondary">
                 Tứ quý, ngũ quý, lộc phát, phong thủy... đủ loại

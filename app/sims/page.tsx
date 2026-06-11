@@ -33,18 +33,15 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
   ]);
 
   return (
-    <div className="pt-16 min-h-screen relative">
-      {/* Neon grid background */}
-      <div className="absolute inset-0 neon-grid-bg opacity-20 pointer-events-none" />
-
+    <div className="pt-16 min-h-screen">
       {/* Hero section */}
-      <div className="relative border-b border-neon-cyan/30 bg-surface/50 backdrop-blur-sm">
+      <div className="border-b border-gold-border-strong bg-surface/50 backdrop-blur-sm">
         <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="font-orbitron text-6xl font-black neon-text-cyan mb-4 tracking-wider">
+          <h1 className="font-orbitron text-6xl font-black neon-text-gold-strong mb-4 tracking-wider">
             KHO SIM SỐ
           </h1>
           <p className="text-xl text-text-secondary font-light">
-            <span className="neon-text-magenta font-bold">{filterCounts.totalAvailable}</span> sim đang có sẵn
+            <span className="neon-text-gold font-bold">{filterCounts.totalAvailable}</span> sim đang có sẵn
           </p>
         </div>
       </div>
@@ -52,7 +49,7 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
       <div className="relative mx-auto max-w-350 px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
           {/* Filter Sidebar */}
-          <Suspense fallback={<div className="h-96 neon-card rounded-lg animate-pulse" />}>
+          <Suspense fallback={<div className="h-96 gold-neon-card rounded-lg animate-pulse" />}>
             <SimFilter
               categories={categories}
               filterCounts={filterCounts}
@@ -66,7 +63,7 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
               fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-64 neon-card rounded-lg animate-pulse" />
+                    <div key={i} className="h-64 gold-neon-card rounded-lg animate-pulse" />
                   ))}
                 </div>
               }
@@ -83,8 +80,8 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
                     href={`/sims?page=${i + 1}${carrier ? `&carrier=${carrier.join(",")}` : ""}${categoryId ? `&category=${categoryId.join(",")}` : ""}${search ? `&search=${search}` : ""}`}
                     className={`w-12 h-12 flex items-center justify-center rounded-lg border-2 font-bold transition-all ${
                       page === i + 1
-                        ? "neon-border-cyan bg-neon-cyan/10 neon-text-cyan"
-                        : "border-neon-cyan/30 bg-surface/50 text-text-secondary hover:neon-border-magenta hover:neon-text-magenta"
+                        ? "neon-border-gold bg-gold-glow/10 neon-text-gold"
+                        : "border-gold-border bg-surface/50 text-text-secondary hover:neon-border-gold hover:neon-text-gold"
                     }`}
                   >
                     {i + 1}

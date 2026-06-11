@@ -152,7 +152,6 @@ export async function getFeaturedSims(limit = 8): Promise<Sim[]> {
     .from("sims")
     .select("*, categories(name, slug, icon)")
     .eq("is_sold", false)
-    .eq("is_featured", true)
     .order("price", { ascending: false })
     .limit(limit);
 

@@ -30,7 +30,7 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
       <div
         className={cn(
           "gold-neon-card relative rounded-lg p-6 cursor-pointer",
-          "opacity-0 animate-fade-up",
+          "animate-fade-up",
           className
         )}
         style={{ animationDelay: `${animationDelay}ms` }}

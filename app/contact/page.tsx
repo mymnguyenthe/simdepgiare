@@ -42,7 +42,7 @@ export default function ContactPage() {
   return (
     <div className="pt-16">
       <div className="border-b border-gold-border bg-surface">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-cormorant text-5xl font-bold text-text-primary">
             Liên Hệ
           </h1>
@@ -52,7 +52,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div>
@@ -115,49 +115,19 @@ export default function ContactPage() {
             </h2>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gold-primary/10 flex items-center justify-center shrink-0">
                   <Phone className="h-6 w-6 text-gold-primary" />
                 </div>
                 <div>
                   <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-1">
                     Điện thoại
                   </h3>
-                  <p className="text-text-secondary">0987 654 321</p>
-                  <p className="text-text-secondary">0912 345 678</p>
+                  <p className="text-text-secondary">0945 556 789</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="h-6 w-6 text-gold-primary" />
-                </div>
-                <div>
-                  <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-1">
-                    Email
-                  </h3>
-                  <p className="text-text-secondary">contact@simdepgiare.vn</p>
-                  <p className="text-text-secondary">support@simdepgiare.vn</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold-primary/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-gold-primary" />
-                </div>
-                <div>
-                  <h3 className="font-cormorant text-xl font-semibold text-text-primary mb-1">
-                    Địa chỉ
-                  </h3>
-                  <p className="text-text-secondary">
-                    123 Đường ABC, Quận 1
-                    <br />
-                    TP. Hồ Chí Minh, Việt Nam
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gold-primary/10 flex items-center justify-center shrink-0">
                   <Clock className="h-6 w-6 text-gold-primary" />
                 </div>
                 <div>

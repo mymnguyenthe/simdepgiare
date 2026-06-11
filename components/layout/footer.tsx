@@ -46,15 +46,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-text-secondary text-sm">
                 <Phone className="h-4 w-4 text-gold-primary mt-0.5" />
-                <span>0987 654 321</span>
-              </li>
-              <li className="flex items-start gap-2 text-text-secondary text-sm">
-                <Mail className="h-4 w-4 text-gold-primary mt-0.5" />
-                <span>contact@simdepgiare.vn</span>
-              </li>
-              <li className="flex items-start gap-2 text-text-secondary text-sm">
-                <MapPin className="h-4 w-4 text-gold-primary mt-0.5" />
-                <span>123 Đường ABC, Quận 1, TP.HCM</span>
+                <span>0945 556 789</span>
               </li>
             </ul>
           </div>

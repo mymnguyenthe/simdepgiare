@@ -25,7 +25,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
   return (
     <div className="pt-16">
       <div className="border-b border-gold-border bg-surface">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <Link
             href="/sims"
             className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-gold-primary transition-colors"
@@ -36,7 +36,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left: Sim Info */}
           <div className="space-y-8">
@@ -107,7 +107,7 @@ export default async function SimDetailPage({ params }: SimDetailPageProps) {
                 <div className="flex items-center gap-3 text-text-secondary">
                   <Phone className="h-5 w-5 text-gold-primary" />
                   <span className="text-lg font-medium text-text-primary">
-                    0987 654 321
+                    0945 556 789
                   </span>
                 </div>
               </div>

@@ -13,11 +13,13 @@ function getCarrier(phone) {
   const viettel = ['086', '096', '097', '098', '032', '033', '034', '035', '036', '037', '038', '039'];
   const vinaphone = ['088', '091', '094', '083', '084', '085'];
   const mobifone = ['089', '090', '093', '070', '076', '077', '078', '079', '081'];
+  const vietnamobile = ['092', '056', '052', '058', '0923', '0565', '0522'];
 
   if (viettel.includes(prefix)) return 'viettel';
   if (vinaphone.includes(prefix)) return 'vinaphone';
   if (mobifone.includes(prefix)) return 'mobifone';
-  return 'other';
+  if (vietnamobile.includes(prefix)) return 'vietnamobile';
+  return 'vietnamobile'; // Default to vietnamobile for unknown prefixes
 }
 
 // Đọc file và parse data
@@ -91,13 +93,13 @@ async function importSims() {
   const viettelCount = sims.filter(s => s.carrier === 'viettel').length;
   const vinaphoneCount = sims.filter(s => s.carrier === 'vinaphone').length;
   const mobifoneCount = sims.filter(s => s.carrier === 'mobifone').length;
-  const otherCount = sims.filter(s => s.carrier === 'other').length;
+  const vietnamobileCount = sims.filter(s => s.carrier === 'vietnamobile').length;
 
   console.log('\n📈 Thống kê theo nhà mạng:');
   console.log(`  - Viettel: ${viettelCount} sim`);
   console.log(`  - VinaPhone: ${vinaphoneCount} sim`);
   console.log(`  - MobiFone: ${mobifoneCount} sim`);
-  if (otherCount > 0) console.log(`  - Khác: ${otherCount} sim`);
+  console.log(`  - Vietnamobile: ${vietnamobileCount} sim`);
 }
 
 importSims().catch(console.error);

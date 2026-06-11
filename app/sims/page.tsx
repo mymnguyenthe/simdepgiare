@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import { SimGrid } from "@/components/sim/sim-grid";
 import { SimFilter } from "@/components/sim/sim-filter";
-import { getSims, getCategories, getFilterCounts } from "@/lib/api/sims";
+import { SimGrid } from "@/components/sim/sim-grid";
+import { getCategories, getFilterCounts, getSims } from "@/lib/api/sims";
+import { Suspense } from "react";
 
 interface SimsPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -36,7 +36,7 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
     <div className="pt-16 min-h-screen">
       {/* Hero section */}
       <div className="border-b border-gold-border-strong bg-surface/50 backdrop-blur-sm">
-        <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8 py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <h1 className="font-montserrat text-6xl font-black neon-text-gold-strong mb-4 tracking-wider">
             KHO SIM SỐ
           </h1>
@@ -46,8 +46,8 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-350 px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
+      <div className="relative mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
           {/* Filter Sidebar */}
           <Suspense fallback={<div className="h-96 gold-neon-card rounded-lg animate-pulse" />}>
             <SimFilter
@@ -57,11 +57,11 @@ export default async function SimsPage({ searchParams }: SimsPageProps) {
             />
           </Suspense>
 
-          {/* Sim Grid */}
+          {/* Sim Grid + Pagination */}
           <div>
             <Suspense
               fallback={
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="h-64 gold-neon-card rounded-lg animate-pulse" />
                   ))}

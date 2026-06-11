@@ -20,19 +20,19 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
     viettel: "Viettel",
     vinaphone: "VinaPhone",
     mobifone: "MobiFone",
-    other: "Khác",
+    vietnamobile: "Vietnamobile",
   };
 
   const carrierColors: Record<string, string> = {
     viettel: "neon-viettel",
     vinaphone: "neon-vinaphone",
     mobifone: "neon-mobifone",
-    other: "text-text-secondary",
+    vietnamobile: "neon-vietnamobile",
   };
 
   const carrierKey = sim.carrier.toLowerCase();
-  const colorClass = carrierColors[carrierKey] || "text-text-secondary";
-  const carrierName = carrierNames[carrierKey] || sim.carrier;
+  const colorClass = carrierColors[carrierKey] || "neon-vietnamobile";
+  const carrierName = carrierNames[carrierKey] || "Vietnamobile";
 
   return (
     <Link href={`/sims/${sim.id}`} className="block">

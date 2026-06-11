@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { FormLabel } from "./form-label";
 
 export interface GoldInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -9,14 +10,7 @@ const GoldInput = React.forwardRef<HTMLInputElement, GoldInputProps>(
   ({ className, label, id, ...props }, ref) => {
     return (
       <div className="space-y-1.5">
-        {label && (
-          <label
-            htmlFor={id}
-            className="block text-xs font-medium uppercase tracking-widest text-text-secondary"
-          >
-            {label}
-          </label>
-        )}
+        {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
         <input
           id={id}
           className={cn(

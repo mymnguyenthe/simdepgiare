@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { formatPrice, formatPhoneNumber } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { GoldButton } from "@/components/ui/gold-button";
 
 interface SimCardProps {
   sim: {
@@ -72,9 +73,9 @@ export function SimCard({ sim, className, animationDelay = 0 }: SimCardProps) {
         <div className="flex-1" />
 
         {/* CTA - Fixed at bottom */}
-        <button className="gold-neon-btn w-full py-3 rounded-md text-sm mt-auto">
+        <GoldButton className="w-full mt-auto">
           Mua ngay
-        </button>
+        </GoldButton>
 
         {/* Featured glow effect */}
         {sim.is_featured && (

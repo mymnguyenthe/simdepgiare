@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { FormLabel } from "./form-label";
 
 export interface GoldSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
@@ -10,14 +11,7 @@ const GoldSelect = React.forwardRef<HTMLSelectElement, GoldSelectProps>(
   ({ className, label, id, options, ...props }, ref) => {
     return (
       <div className="space-y-1.5">
-        {label && (
-          <label
-            htmlFor={id}
-            className="block text-xs font-medium uppercase tracking-widest text-text-secondary"
-          >
-            {label}
-          </label>
-        )}
+        {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
         <select
           id={id}
           className={cn(

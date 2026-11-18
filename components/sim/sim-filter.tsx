@@ -12,6 +12,8 @@ interface SimFilterProps {
       viettel: number;
       vinaphone: number;
       mobifone: number;
+      vietnamobile?: number;
+      itelecom?: number;
     };
     totalAvailable: number;
   };
@@ -29,9 +31,11 @@ export function SimFilter({ categories, filterCounts, currentFilters }: SimFilte
   const [search, setSearch] = useState(currentFilters.search || "");
 
   const carriers = [
-    { value: "viettel", label: "Viettel", count: filterCounts.carriers.viettel },
-    { value: "vinaphone", label: "VinaPhone", count: filterCounts.carriers.vinaphone },
-    { value: "mobifone", label: "MobiFone", count: filterCounts.carriers.mobifone },
+    { value: "vinaphone", label: "VinaPhone", count: filterCounts.carriers.vinaphone || 0 },
+    { value: "viettel", label: "Viettel", count: filterCounts.carriers.viettel || 0 },
+    { value: "mobifone", label: "MobiFone", count: filterCounts.carriers.mobifone || 0 },
+    { value: "vietnamobile", label: "Vietnamobile", count: filterCounts.carriers.vietnamobile || 0 },
+    { value: "itelecom", label: "Itelecom", count: filterCounts.carriers.itelecom || 0 },
   ];
 
   const sortOptions = [

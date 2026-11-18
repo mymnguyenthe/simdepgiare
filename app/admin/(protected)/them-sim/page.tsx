@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { GoldButton } from "@/components/ui/gold-button";
 import { GoldInput } from "@/components/ui/gold-input";
 import { GoldSelect } from "@/components/ui/gold-select";
-import { createClient } from "@/lib/supabase/client";
 
 interface Category {
   id: string;
@@ -41,9 +40,15 @@ export default function ThemSimPage() {
 
   useEffect(() => {
     async function fetchCategories() {
-      const supabase = createClient();
-      const { data } = await supabase.from("categories").select("id, name, slug").order("sort_order");
-      if (data) setCategories(data);
+      try {
+        const res = await fetch("/api/categories");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.data) setCategories(json.data);
+        }
+      } catch (err) {
+        console.error("Failed to load categories:", err);
+      }
     }
     fetchCategories();
   }, []);

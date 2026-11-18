@@ -1,3 +1,5 @@
+import { getDb, getConnectionString } from "@/lib/db";
+
 // Types
 export interface Sim {
   id: string;
@@ -56,170 +58,220 @@ export async function getSims(filters: SimsFilter = {}): Promise<SimsResult> {
     sortBy = "newest",
   } = filters;
 
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
-
-  let query = supabase
-    .from("sims")
-    .select("*, categories(name, slug, icon)", { count: "exact" })
-    .eq("is_sold", false);
-
-  if (carrier && carrier.length > 0) {
-    query = query.in("carrier", carrier);
-  }
-
-  if (categoryId && categoryId.length > 0) {
-    query = query.in("category_id", categoryId);
-  }
-
-  if (minPrice !== undefined) {
-    query = query.gte("price", minPrice);
-  }
-
-  if (maxPrice !== undefined) {
-    query = query.lte("price", maxPrice);
-  }
-
-  if (search && search.trim()) {
-    query = query.ilike("phone_number", `%${search.trim()}%`);
-  }
-
-  if (isFeatured !== undefined) {
-    query = query.eq("is_featured", isFeatured);
-  }
-
-  switch (sortBy) {
-    case "price_asc":
-      query = query.order("price", { ascending: true });
-      break;
-    case "price_desc":
-      query = query.order("price", { ascending: false });
-      break;
-    default:
-      query = query.order("created_at", { ascending: false });
-      break;
-  }
-
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
-  query = query.range(from, to);
-
-  const { data, error, count } = await query;
-
-  if (error) {
-    console.error("getSims error:", error);
+  if (!getConnectionString()) {
     return { data: [], count: 0, page, pageSize, totalPages: 0 };
   }
 
-  // Map category_name from nested categories
-  const mapped = (data || []).map((item: Record<string, unknown>) => ({
-    ...item,
-    category_name: (item.categories as Record<string, unknown>)?.name as string | undefined,
-  }));
+  try {
+    const sql = getDb();
+    const whereClauses: string[] = ["s.is_sold = FALSE"];
+    const params: unknown[] = [];
 
-  return {
-    data: mapped as Sim[],
-    count: count || 0,
-    page,
-    pageSize,
-    totalPages: Math.ceil((count || 0) / pageSize),
-  };
+    if (carrier && carrier.length > 0) {
+      params.push(carrier);
+      whereClauses.push(`s.carrier = ANY($${params.length})`);
+    }
+
+    if (categoryId && categoryId.length > 0) {
+      params.push(categoryId);
+      whereClauses.push(`s.category_id = ANY($${params.length})`);
+    }
+
+    if (minPrice !== undefined) {
+      params.push(minPrice);
+      whereClauses.push(`s.price >= $${params.length}`);
+    }
+
+    if (maxPrice !== undefined) {
+      params.push(maxPrice);
+      whereClauses.push(`s.price <= $${params.length}`);
+    }
+
+    if (search && search.trim()) {
+      params.push(`%${search.trim()}%`);
+      whereClauses.push(`s.phone_number ILIKE $${params.length}`);
+    }
+
+    if (isFeatured !== undefined) {
+      params.push(isFeatured);
+      whereClauses.push(`s.is_featured = $${params.length}`);
+    }
+
+    const whereSql = whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
+
+    let orderBy = "s.created_at DESC";
+    if (sortBy === "price_asc") {
+      orderBy = "s.price ASC";
+    } else if (sortBy === "price_desc") {
+      orderBy = "s.price DESC";
+    }
+
+    const offset = (page - 1) * pageSize;
+
+    // Count total query
+    const countQuery = `SELECT COUNT(*)::int AS count FROM sims s ${whereSql}`;
+    const countResult = (await sql.query(countQuery, params)) as unknown as { count: number }[];
+    const totalCount = countResult[0]?.count || 0;
+
+    // Data query
+    const dataParams = [...params, pageSize, offset];
+    const dataQuery = `
+      SELECT
+        s.*,
+        c.name AS category_name
+      FROM sims s
+      LEFT JOIN categories c ON s.category_id = c.id
+      ${whereSql}
+      ORDER BY ${orderBy}
+      LIMIT $${dataParams.length - 1} OFFSET $${dataParams.length}
+    `;
+
+    const rows = (await sql.query(dataQuery, dataParams)) as unknown as Sim[];
+
+    return {
+      data: rows,
+      count: totalCount,
+      page,
+      pageSize,
+      totalPages: Math.ceil(totalCount / pageSize),
+    };
+  } catch (error) {
+    console.error("getSims error:", error);
+    return { data: [], count: 0, page, pageSize, totalPages: 0 };
+  }
 }
 
 export async function getSimById(id: string): Promise<Sim | null> {
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
+  if (!getConnectionString()) return null;
 
-  const { data, error } = await supabase
-    .from("sims")
-    .select("*, categories(name, slug, icon)")
-    .eq("id", id)
-    .single();
+  try {
+    const sql = getDb();
+    const rows = (await sql`
+      SELECT
+        s.*,
+        c.name AS category_name
+      FROM sims s
+      LEFT JOIN categories c ON s.category_id = c.id
+      WHERE s.id = ${id}
+      LIMIT 1
+    `) as unknown as Sim[];
 
-  if (error || !data) return null;
-
-  return {
-    ...data,
-    category_name: (data.categories as Record<string, unknown>)?.name as string | undefined,
-  } as Sim;
+    return rows[0] || null;
+  } catch (error) {
+    console.error("getSimById error:", error);
+    return null;
+  }
 }
 
 export async function getFeaturedSims(limit = 8): Promise<Sim[]> {
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
+  if (!getConnectionString()) return [];
 
-  const { data, error } = await supabase
-    .from("sims")
-    .select("*, categories(name, slug, icon)")
-    .eq("is_sold", false)
-    .order("price", { ascending: false })
-    .limit(limit);
+  try {
+    const sql = getDb();
+    const rows = (await sql`
+      SELECT
+        s.*,
+        c.name AS category_name
+      FROM sims s
+      LEFT JOIN categories c ON s.category_id = c.id
+      WHERE s.is_sold = FALSE
+      ORDER BY s.price DESC
+      LIMIT ${limit}
+    `) as unknown as Sim[];
 
-  if (error) return [];
-
-  return (data || []).map((item: Record<string, unknown>) => ({
-    ...item,
-    category_name: (item.categories as Record<string, unknown>)?.name as string | undefined,
-  })) as Sim[];
+    return rows;
+  } catch (error) {
+    console.error("getFeaturedSims error:", error);
+    return [];
+  }
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
+  if (!getConnectionString()) return [];
 
-  const { data, error } = await supabase
-    .from("categories")
-    .select("*")
-    .order("sort_order", { ascending: true });
+  try {
+    const sql = getDb();
+    const rows = (await sql`
+      SELECT *
+      FROM categories
+      ORDER BY sort_order ASC
+    `) as unknown as Category[];
 
-  if (error) return [];
-  return (data || []) as Category[];
+    return rows;
+  } catch (error) {
+    console.error("getCategories error:", error);
+    return [];
+  }
 }
 
 export async function getFilterCounts() {
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
+  if (!getConnectionString()) {
+    return {
+      carriers: { viettel: 0, vinaphone: 0, mobifone: 0, vietnamobile: 0, itelecom: 0 },
+      totalAvailable: 0,
+    };
+  }
 
-  const [viettelCount, vinaphoneCount, mobifoneCount, totalAvailable] = await Promise.all([
-    supabase.from("sims").select("*", { count: "exact", head: true }).eq("carrier", "viettel").eq("is_sold", false),
-    supabase.from("sims").select("*", { count: "exact", head: true }).eq("carrier", "vinaphone").eq("is_sold", false),
-    supabase.from("sims").select("*", { count: "exact", head: true }).eq("carrier", "mobifone").eq("is_sold", false),
-    supabase.from("sims").select("*", { count: "exact", head: true }).eq("is_sold", false),
-  ]);
+  try {
+    const sql = getDb();
+    const result = (await sql`
+      SELECT
+        COUNT(*) FILTER (WHERE carrier = 'viettel' AND is_sold = FALSE)::int AS viettel,
+        COUNT(*) FILTER (WHERE carrier = 'vinaphone' AND is_sold = FALSE)::int AS vinaphone,
+        COUNT(*) FILTER (WHERE carrier = 'mobifone' AND is_sold = FALSE)::int AS mobifone,
+        COUNT(*) FILTER (WHERE carrier = 'vietnamobile' AND is_sold = FALSE)::int AS vietnamobile,
+        COUNT(*) FILTER (WHERE carrier = 'itelecom' AND is_sold = FALSE)::int AS itelecom,
+        COUNT(*) FILTER (WHERE is_sold = FALSE)::int AS total
+      FROM sims;
+    `) as unknown as {
+      viettel: number;
+      vinaphone: number;
+      mobifone: number;
+      vietnamobile: number;
+      itelecom: number;
+      total: number;
+    }[];
 
-  return {
-    carriers: {
-      viettel: viettelCount.count || 0,
-      vinaphone: vinaphoneCount.count || 0,
-      mobifone: mobifoneCount.count || 0,
-    },
-    totalAvailable: totalAvailable.count || 0,
-  };
+    const row = result[0];
+    return {
+      carriers: {
+        viettel: row?.viettel || 0,
+        vinaphone: row?.vinaphone || 0,
+        mobifone: row?.mobifone || 0,
+        vietnamobile: row?.vietnamobile || 0,
+        itelecom: row?.itelecom || 0,
+      },
+      totalAvailable: row?.total || 0,
+    };
+  } catch (error) {
+    console.error("getFilterCounts error:", error);
+    return {
+      carriers: { viettel: 0, vinaphone: 0, mobifone: 0, vietnamobile: 0, itelecom: 0 },
+      totalAvailable: 0,
+    };
+  }
 }
 
 export async function getRelatedSims(simId: string, limit = 8): Promise<Sim[]> {
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
+  if (!getConnectionString()) return [];
 
-  const { data: currentSim } = await supabase
-    .from("sims")
-    .select("category_id, carrier")
-    .eq("id", simId)
-    .single();
+  try {
+    const sql = getDb();
+    const rows = (await sql`
+      SELECT
+        s.*,
+        c.name AS category_name
+      FROM sims s
+      LEFT JOIN categories c ON s.category_id = c.id
+      WHERE s.is_sold = FALSE
+        AND s.id != ${simId}
+        AND s.carrier = (SELECT carrier FROM sims WHERE id = ${simId})
+      LIMIT ${limit}
+    `) as unknown as Sim[];
 
-  if (!currentSim) return [];
-
-  const { data } = await supabase
-    .from("sims")
-    .select("*, categories(name, slug)")
-    .eq("is_sold", false)
-    .neq("id", simId)
-    .eq("carrier", currentSim.carrier)
-    .eq("category_id", currentSim.category_id)
-    .limit(limit);
-
-  return (data || []).map((item: Record<string, unknown>) => ({
-    ...item,
-    category_name: (item.categories as Record<string, unknown>)?.name as string | undefined,
-  })) as Sim[];
+    return rows;
+  } catch (error) {
+    console.error("getRelatedSims error:", error);
+    return [];
+  }
 }

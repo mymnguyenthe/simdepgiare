@@ -5,6 +5,8 @@ import { getCategories, getFeaturedSims } from "@/lib/api/sims";
 import { Award, Phone, Shield, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const [featuredSims, categories] = await Promise.all([
     getFeaturedSims(8),

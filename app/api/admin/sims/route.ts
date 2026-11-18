@@ -1,15 +1,11 @@
-import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
+import { getAdminSessionServer } from "@/lib/auth/admin";
+import { getDb } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   // Verify admin is logged in
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
+  const session = await getAdminSessionServer();
+  if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -40,40 +36,43 @@ export async function POST(request: Request) {
       );
     }
 
-    // Insert using admin client (bypasses RLS)
-    const adminClient = createAdminClient();
-    const { data, error } = await adminClient
-      .from("sims")
-      .insert({
+    const sql = getDb();
+    const rows = await sql`
+      INSERT INTO sims (
+        id,
         phone_number,
         price,
         carrier,
-        category_id: category_id || null,
-        description: description || null,
-        feng_shui: feng_shui || null,
-        is_featured: is_featured || false,
-        is_sold: false,
-      })
-      .select()
-      .single();
+        category_id,
+        description,
+        feng_shui,
+        is_featured,
+        is_sold
+      )
+      VALUES (
+        gen_random_uuid()::text,
+        ${phone_number},
+        ${price},
+        ${carrier},
+        ${category_id || null},
+        ${description || null},
+        ${feng_shui || null},
+        ${is_featured || false},
+        false
+      )
+      RETURNING *
+    `;
 
-    if (error) {
-      console.error("Insert sim error:", error);
-      if (error.code === "23505") {
-        return NextResponse.json(
-          { error: "Số điện thoại đã tồn tại" },
-          { status: 409 }
-        );
-      }
+    return NextResponse.json({ success: true, data: rows[0] }, { status: 201 });
+  } catch (err: unknown) {
+    console.error("API error:", err);
+    const pgError = err as { code?: string; message?: string };
+    if (pgError?.code === "23505") {
       return NextResponse.json(
-        { error: "Không thể thêm sim" },
-        { status: 500 }
+        { error: "Số điện thoại đã tồn tại" },
+        { status: 409 }
       );
     }
-
-    return NextResponse.json({ success: true, data }, { status: 201 });
-  } catch (err) {
-    console.error("API error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

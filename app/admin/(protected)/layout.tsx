@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { getAdminSessionServer } from "@/lib/auth/admin";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
@@ -7,28 +7,13 @@ export default async function AdminProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Check if Supabase is configured
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-error">Lỗi cấu hình</h1>
-          <p className="text-text-secondary">
-            Biến môi trường Supabase chưa được cấu hình. Vui lòng kiểm tra file .env.local
-          </p>
-        </div>
-      </div>
-    );
-  }
+  const session = await getAdminSessionServer();
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
+  if (!session) {
     redirect("/admin/login");
   }
+
+  const userEmail = (session.email as string) || "admin@simdepgiare.com";
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,7 +49,7 @@ export default async function AdminProtectedLayout({
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-text-secondary text-sm">{user.email}</span>
+              <span className="text-text-secondary text-sm">{userEmail}</span>
               <form action="/api/auth/logout" method="POST">
                 <button
                   type="submit"

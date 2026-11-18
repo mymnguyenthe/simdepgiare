@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { GoldButton } from "@/components/ui/gold-button";
 import { GoldInput } from "@/components/ui/gold-input";
 
@@ -16,17 +15,24 @@ export default function AdminLoginPage() {
     setError("");
     setLoading(true);
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    } else {
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Đăng nhập thất bại");
+        setLoading(false);
+        return;
+      }
+
       window.location.href = "/admin/them-sim";
+    } catch {
+      setError("Không thể kết nối đến máy chủ");
+      setLoading(false);
     }
   };
 

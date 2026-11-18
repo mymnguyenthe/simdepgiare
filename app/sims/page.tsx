@@ -4,6 +4,8 @@ import { Pagination } from "@/components/pagination";
 import { getCategories, getFilterCounts, getSims } from "@/lib/api/sims";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 interface SimsPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
